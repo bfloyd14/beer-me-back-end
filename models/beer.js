@@ -25,7 +25,7 @@ const beerSchema = new Schema({
   style: {
     type: String,
     required: true,
-    enum: ['Ale', 'Lager', 'IPA', 'Stout', 'Pale Ale', 'Pilsner', 'Amber Ale', 'Porter', 'Witbier', 'Brown Ale', 'American Pale Ale', 'Kolsch', 'Helles', 'Saison', 'Gose', 'Tripel', 'Red Ale', 'Hefeweizen', 'Marzen', 'Lambic', 'Scotch Ale', 'Doppelbock', 'Vienna Lager', 'Scharzbier', 'Weizenbock', 'Helles Bock', 'Dunkel', 'American Wheat Beer', 'Hard Seltzer', 'Cider', 'FMB'
+    enum: ['Ale', 'Lager', 'IPA', 'Stout', 'Pale Ale', 'Pilsner', 'Amber Ale', 'Porter', 'Witbier', 'Brown Ale', 'American Pale Ale', 'Kolsch', 'Helles', 'Saison', 'Gose', 'Tripel', 'Red Ale', 'Hefeweizen', 'Marzen', 'Lambic', 'Scotch Ale', 'Doppelbock', 'Vienna Lager', 'Scharzbier', 'Weizenbock', 'Helles Bock', 'Dunkel', 'American Wheat Beer', 'Hard Seltzer', 'Cider', 'FMB', 'Barrel Aged'
     ]
   },
   brewery: String,
@@ -34,7 +34,8 @@ const beerSchema = new Schema({
     type: Number,
     required: true,
 },
-reviews: [reviewSchema]
+  author: { type: Schema.Types.ObjectId, ref: 'Profile'},
+  reviews: [reviewSchema]
 },
 {
   timestamps: true,
