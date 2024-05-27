@@ -49,8 +49,20 @@ async function update(req, res){
   }
 }
 
+async function show(req,res){
+  try {
+    const beer = await Beer.findById(req.parans.beerId)
+    .populate(['author', 'reviews.author'])
+    res.status(200).json(beer)
+  } catch (err) {
+    console.log(err)
+  }
+
+}
+
 export{
   create,
   index,
   update,
+  show,
 }
