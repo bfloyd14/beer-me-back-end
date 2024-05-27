@@ -11,5 +11,7 @@ const router = Router()
 router.use(decodeUserFromToken)
 router.post('/', checkAuth, beersCtrl.create)
 router.get('/', checkAuth, beersCtrl.index)
+router.put(':beerId', checkAuth, beersCtrl.update)
+
 
 export { router }
