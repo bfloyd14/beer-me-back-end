@@ -46,6 +46,7 @@ async function update(req, res){
     }
   } catch (err) {
     console.log(err)
+    res.status(500).json(err)
   }
 }
 
@@ -56,8 +57,26 @@ async function show(req,res){
     res.status(200).json(beer)
   } catch (err) {
     console.log(err)
+    res.status(500).json(err)
   }
+}
 
+async function deleteBeer(req,res){
+  try {
+    const beer = await Beer.findById(req.params.beerId)
+    if(beer.author.equals(req.user.profile)){
+      await Beer.findByIdAndDelete(req.params.beerId)
+      const profile = await Profile.findById(req.user.profile)
+      profile.beers.remove({_id: req.params.beerId })
+      await Profile.save()
+      res.status(200).json(beer)
+    } else{
+      res.status(500).jason({error: 'Not Authorized'})
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
+  }
 }
 
 export{
@@ -65,4 +84,5 @@ export{
   index,
   update,
   show,
+  deleteBeer as delete,
 }
