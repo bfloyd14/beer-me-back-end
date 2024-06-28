@@ -52,7 +52,7 @@ async function update(req, res){
 
 async function show(req,res){
   try {
-    const beer = await Beer.findById(req.parans.beerId)
+    const beer = await Beer.findById(req.params.beerId)
     .populate(['author', 'reviews.author'])
     res.status(200).json(beer)
   } catch (err) {
