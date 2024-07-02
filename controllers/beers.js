@@ -36,7 +36,7 @@ async function update(req, res){
     if(beerToCheck.author.equals(req.user.profile)){
       console.log('author is a match')
       const beer = await Beer.findByIdAndUpdate(
-        req.parans.beerId,
+        req.params.beerId,
         req.body,
         {new: true}
       ).populate('author')
