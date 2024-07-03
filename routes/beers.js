@@ -9,10 +9,11 @@ const router = Router()
 
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
-router.post('/', checkAuth, beersCtrl.create)
 router.get('/', checkAuth, beersCtrl.index)
-router.put('/:beerId', checkAuth, beersCtrl.update)
 router.get('/:beerId', checkAuth, beersCtrl.show)
+router.put('/:beerId', checkAuth, beersCtrl.update)
+router.post('/', checkAuth, beersCtrl.create)
+router.post('/:beerId/reviews', checkAuth, beersCtrl.createReview)
 router.delete('/:beerId', checkAuth, beersCtrl.delete)
 
 export { router }

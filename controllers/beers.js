@@ -79,10 +79,27 @@ async function deleteBeer(req,res){
   }
 }
 
+async function createReview(req, res){
+  try {
+    req.body.author = req.user.profile
+    const beer = await Beer.findById(req.params.beerId)
+    beer.reviews.push(req.body)
+    await beer.save()
+    const newReview = beer.reviews.at(-1)
+    const profile = await Profile.findById(req.user.profile)
+    newReview.author = profile 
+    res.status(201).json(newReview)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
+  }
+}
+
 export{
   create,
   index,
   update,
   show,
   deleteBeer as delete,
+  createReview,
 }
