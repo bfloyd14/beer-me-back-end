@@ -7,6 +7,7 @@ const reviewSchema = new Schema ({
   author: {type: Schema.Types.ObjectId, ref: 'Profile'},
   rating: {
     type: Number,
+    default: 0,
     min: 0,
     max: 5,
     required: true,
@@ -34,6 +35,14 @@ const beerSchema = new Schema({
     type: Number,
     required: true,
 },
+  feedback: String,
+  stars: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 5,         
+    required: true,
+  },
   author: { type: Schema.Types.ObjectId, ref: 'Profile'},
   reviews: [reviewSchema]
 },
