@@ -95,6 +95,19 @@ async function createReview(req, res){
   }
 }
 
+async function updateReview(req, res){
+  try {
+    const beer = await Beer.findById(req.params.beerId)
+    const review = beer.reviews.id(req.body._id)
+    review.comment = req.body.comment
+    await beer.save()
+    res.status(200).json(beer)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
+  }
+}
+
 export{
   create,
   index,
@@ -102,4 +115,5 @@ export{
   show,
   deleteBeer as delete,
   createReview,
+  updateReview,
 }
