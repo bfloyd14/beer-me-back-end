@@ -68,7 +68,7 @@ async function deleteBeer(req,res){
       await Beer.findByIdAndDelete(req.params.beerId)
       const profile = await Profile.findById(req.user.profile)
       profile.beers.remove({_id: req.params.beerId })
-      await Profile.save()
+      await profile.save()
       res.status(200).json(beer)
     } else{
       res.status(500).jason({error: 'Not Authorized'})
