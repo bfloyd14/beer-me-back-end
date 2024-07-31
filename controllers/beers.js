@@ -108,6 +108,18 @@ async function updateReview(req, res){
   }
 }
 
+async function deleteReview(req,res){
+  try {
+    const beer = await Beer.findById(req.params.beerId)
+    beer.reviews.remove({_id: req.params.reviewId})
+    await beer.save()
+    res.status(200).json(beer)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
+  }
+}
+
 export{
   create,
   index,
@@ -116,4 +128,5 @@ export{
   deleteBeer as delete,
   createReview,
   updateReview,
+  deleteReview
 }

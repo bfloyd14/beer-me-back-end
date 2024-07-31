@@ -16,5 +16,6 @@ router.put('/:beerId/reviews', checkAuth, beersCtrl.updateReview)
 router.post('/', checkAuth, beersCtrl.create)
 router.post('/:beerId/reviews', checkAuth, beersCtrl.createReview)
 router.delete('/:beerId', checkAuth, beersCtrl.delete)
+router.delete('/:beerId/reviews/:reviewId', checkAuth, beersCtrl.deleteReview)
 
 export { router }
